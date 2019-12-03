@@ -113,22 +113,22 @@ Const
       9851, 9857, 9859, 9871, 9883, 9887, 9901, 9907, 9923, 9929, 9931, 9941, 9949, 9967, 9973);
 
 
-Procedure ECPointToECPointString(ECPoint : TECPoint; Prime : TFGInt; Compression : boolean; Var ECPointString : String);
-Procedure ECPointStringToECPoint(ECPointString : String; Prime, a, b : TFGInt; Var ECPoint : TECPoint);
-Procedure ECPointCopy(P : TECPoint; Var Copied : TECPoint);
+Procedure ECPointToECPointString(ECPoint : TECPoint; Prime : TFGInt; Compression : boolean; Out ECPointString : RawByteString);
+Procedure ECPointStringToECPoint(ECPointString : RawByteString; Prime, a, b : TFGInt; Out ECPoint : TECPoint);
+Procedure ECPointCopy(P : TECPoint; Out Copied : TECPoint);
 Procedure ECPointDestroy(Var P : TECPoint);
 Procedure ECDoublePoint(P : TECPoint; Prime, a : TFGInt; Var Doubled : TECPoint);
-Procedure ECAddPoints(P, Q : TECPoint; Prime, a : TFGInt; Var Sum : TECPoint);
-Procedure ECPointKMultiple(P : TECPoint; Prime, a, k : TFGInt; Var Multiple : TECPoint);
+Procedure ECAddPoints(P, Q : TECPoint; Prime, a : TFGInt; Out Sum : TECPoint);
+Procedure ECPointKMultiple(P : TECPoint; Prime, a, k : TFGInt; Out Multiple : TECPoint);
 Procedure ECPointInverse(P : TECPoint; Prime : TFGInt; Var Inverse : TECPoint);
-Procedure ECInbedStringOnEC(InString : String; Prime, a, b : TFGInt; Var P : TECPoint; Var DidItWork : Boolean);
-Procedure ECExtractInbeddedString(P : TECPoint; Var InBeddedString : String);
+Procedure ECInbedStringOnEC(InString : RawByteString; Prime, a, b : TFGInt; Out P : TECPoint; Out DidItWork : Boolean);
+Procedure ECExtractInbeddedString(P : TECPoint; Var InBeddedString : RawByteString);
 Procedure ECPrimeSearch(Var GInt : TFGInt; nrRMtests : byte);
 Procedure ECFindNextPointOnEC(Var Prime, a, b : TFGInt; Var P : TECPoint);
 Procedure ConstructCurveWithCMD(D : byte; Var a0, b0 : TFGInt);
-Procedure IsCMD(Var D, p, W, V : TFGInt; Var IsCMD : boolean);
-Procedure FindNextCMCandidate(Var p : TFGInt; Var D : byte; Var Found : boolean);
-Procedure FindOrders(Var p : TFGInt; Var D : byte; Var Orders : TOrderList; Var Found : boolean);
+Procedure IsCMD(Const D, p : TFGInt; Out W, V : TFGInt; Out IsCMD : boolean);
+Procedure FindNextCMCandidate(Const p : TFGInt; Var D : byte; Out Found : boolean);
+Procedure FindOrders(Const p : TFGInt; Out D : byte; Out Orders : TOrderList; Out Found : boolean);
 Procedure IsNearlyPrime(Var n : TFGInt; leastsize : longint; Var k, r : TFGInt; Var INP : boolean);
 Procedure ConstructCurveAndPointWithGoodORder(Var p, k, r : TFGInt; D : byte; Var a, b : TFGInt; Var G : TECPoint);
 Procedure ConstructCurveAndPoint(Var p : TFGINt; leastsize : longint; Var a, b, k, r : TFGInt; Var G : TECPoint; Var DidItWork : boolean);
@@ -143,10 +143,10 @@ Implementation
 // Convert a point (ECPoint) on an EC y^2 = x^3 + a*x + b over GF(Prime)
 // to a string (ECPointString)
 
-Procedure ECPointToECPointString(ECPoint : TECPoint; Prime : TFGInt; Compression : boolean; Var ECPointString : String);
+Procedure ECPointToECPointString(ECPoint : TECPoint; Prime : TFGInt; Compression : boolean; Out ECPointString : RawByteString);
 Var
    l : longint;
-   temp : String;
+   temp : RawByteString;
 Begin
    If ECPoint.infinity Then
    Begin
@@ -172,9 +172,9 @@ End;
 // Does the opposite from the procedure above, ECPointString MUST be
 // created by the above procedure
 
-Procedure ECPointStringToECPoint(ECPointString : String; Prime, a, b : TFGInt; Var ECPoint : TECPoint);
+Procedure ECPointStringToECPoint(ECPointString : RawByteString; Prime, a, b : TFGInt; Out ECPoint : TECPoint);
 Var
-   temp : String;
+   temp : RawByteString;
    temp1, temp2, temp3 : TFGInt;
    l : longint;
 Begin
@@ -230,7 +230,7 @@ End;
 // Make a copy of an ECPoint
 // Copied := P
 
-Procedure ECPointCopy(P : TECPoint; Var Copied : TECPoint);
+Procedure ECPointCopy(P : TECPoint; Out Copied : TECPoint);
 Begin
    Copied.Infinity := P.Infinity;
    FGIntCopy(P.XCoordinate, Copied.XCoordinate);
@@ -306,7 +306,7 @@ End;
 // finite prime field with "Prime" elements
 // Q + P = Sum
 
-Procedure ECAddPoints(P, Q : TECPoint; Prime, a : TFGInt; Var Sum : TECPoint);
+Procedure ECAddPoints(P, Q : TECPoint; Prime, a : TFGInt; Out Sum : TECPoint);
 Var
    temp1, temp2, temp3, temp4 : TFGInt;
 Begin
@@ -377,7 +377,7 @@ End;
 // y^2 = x^3 + a*x + b, over the finite prime field with "Prime" elements
 // k * P = Multiple
 
-Procedure ECPointKMultiple(P : TECPoint; Prime, a, k : TFGInt; Var Multiple : TECPoint);
+Procedure ECPointKMultiple(P : TECPoint; Prime, a, k : TFGInt; Out Multiple : TECPoint);
 Var
    temp : String;
    i : longint;
@@ -428,9 +428,9 @@ End;
 // Inbed a string, InString, on an Elliptic Curve, y^2 = x^3 + a*x + b,
 // (length(InString) + 2)*8 must be less than the size of Prime in bits
 
-Procedure ECInbedStringOnEC(InString : String; Prime, a, b : TFGInt; Var P : TECPoint; Var DidItWork : Boolean);
+Procedure ECInbedStringOnEC(InString : RawByteString; Prime, a, b : TFGInt; Out P : TECPoint; Out DidItWork : Boolean);
 Var
-   temp : String;
+   temp : RawByteString;
    pad : byte;
    i, L : integer;
    one, limit, counter, temp1, temp2, temp3, YSquare : TFGInt;
@@ -482,7 +482,7 @@ End;
 
 // Extract an inbedded string which is inbedded with the procedure above
 
-Procedure ECExtractInbeddedString(P : TECPoint; Var InBeddedString : String);
+Procedure ECExtractInbeddedString(P : TECPoint; Var InBeddedString : RawByteString);
 Var
    b : byte;
 Begin
@@ -593,7 +593,7 @@ End;
 // Test wether D is a CM Discriminant or not (P1363A)
 // If so compute W and if necessary V so that 4*p = W^2 + D*V^2
 
-Procedure IsCMD(Var D, p, W, V : TFGInt; Var IsCMD : boolean);
+Procedure IsCMD(Const D, p : TFGInt; Out W, V : TFGInt; Out IsCMD : boolean);
 Var
    temp, tempd, temp1, temp2, A, B, C, U1, U2, S11, S12, S21, S22 : TFGInt;
    l : integer;
@@ -728,7 +728,7 @@ End;
 
 // Speaks for itself (P1363A)
 
-Procedure FindNextCMCandidate(Var p : TFGInt; Var D : byte; Var Found : boolean);
+Procedure FindNextCMCandidate(Const p : TFGInt; Var D : byte; Out Found : boolean);
 Const
    candidates1 : Array[0..9] Of byte = (9, 1, 2, 3, 7, 11, 19, 43, 67, 163);
    candidates3 : Array[0..8] Of byte = (8, 2, 3, 7, 11, 19, 43, 67, 163);
@@ -770,7 +770,7 @@ End;
 // Given a prime p, a CMD D, find possible orders for a curve with CMD D,
 // Found = false if no orders are found
 
-Procedure FindOrders(Var p : TFGInt; Var D : byte; Var Orders : TOrderList; Var Found : boolean);
+Procedure FindOrders(Const p : TFGInt; Out D : byte; Out Orders : TOrderList; Out Found : boolean);
 Var
    DGInt, temp, W, V : TFGInt;
    l : integer;

@@ -31,8 +31,8 @@ Interface
 
 Uses FGInt, ECGFp, math;
 
-Procedure ECElGamalEncrypt(M : String; P, a, b, k : TFGInt; g, y : TECPoint; Compression : boolean; Var E : String);
-Procedure ECElGamalDecrypt(E : String; P, a, b, x : TFGInt; Var D : String);
+Procedure ECElGamalEncrypt(M : RawByteString; P, a, b, k : TFGInt; g, y : TECPoint; Compression : boolean; Var E : RawByteString);
+Procedure ECElGamalDecrypt(E : RawByteString; P, a, b, x : TFGInt; Var D : RawByteString);
 
 Implementation
 
@@ -43,10 +43,10 @@ Implementation
 // If you want the output to be compressed, set the parameter Compressed to
 // true and false else.  The output is a string E
 
-Procedure ECElGamalEncrypt(M : String; P, a, b, k : TFGInt; g, y : TECPoint; Compression : boolean; Var E : String);
+Procedure ECElGamalEncrypt(M : RawByteString; P, a, b, k : TFGInt; g, y : TECPoint; Compression : boolean; Var E : RawByteString);
 Var
    t, c : longint;
-   temp, temp1, temp2 : String;
+   temp, temp1, temp2 : RawByteString;
    ok : boolean;
    ECtemp1, ECtemp2, ECtemp3, ECtemp4 : TECPoint;
    FGtemp, k1, kt : TFGInt;
@@ -101,10 +101,10 @@ End;
 // equal zero, x is your private parameter as defined above
 // The output is a string D
 
-Procedure ECElGamalDecrypt(E : String; P, a, b, x : TFGInt; Var D : String);
+Procedure ECElGamalDecrypt(E : RawByteString; P, a, b, x : TFGInt; Var D : RawByteString);
 Var
    t, i : longint;
-   temp, temp1 : String;
+   temp, temp1 : RawByteString;
    ECtemp1, ECtemp2, ECtemp3, ECtemp4 : TECPoint;
 Begin
    FGIntToBase256String(P, temp);

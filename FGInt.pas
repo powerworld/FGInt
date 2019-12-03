@@ -40,75 +40,76 @@ Type
       Number : Array Of LongWord;
    End;
 
-Procedure zeronetochar8(Var g : char; Const x : String);
-Procedure zeronetochar6(Var g : integer; Const x : String);
-Procedure initialize8(Var trans : Array Of String);
-Procedure initialize6(Var trans : Array Of String);
-Procedure initialize6PGP(Var trans : Array Of String);
-Procedure ConvertBase256to64(Const str256 : String; Var str64 : String);
-Procedure ConvertBase64to256(Const str64 : String; Var str256 : String);
-Procedure ConvertBase256to2(Const str256 : String; Var str2 : String);
+Procedure zeronetochar8(Out g : char; Const x : String);
+Procedure zeronetochar6(Out g : integer; Const x : String);
+Procedure initialize8(Out trans : Array Of String);
+Procedure initialize6(Out trans : Array Of String);
+Procedure initialize6PGP(Out trans : Array Of String);
+Procedure ConvertBase256to64(Const str256 : RawByteString; Var str64 : String);
+Procedure ConvertBase64to256(Const str64 : String; Var str256 : RawByteString);
+Procedure ConvertBase256to2(Const str256 : RawByteString; Var str2 : String);
 Procedure ConvertBase64to2(Const str64 : String; Var str2 : String);
-Procedure ConvertBase2to256(str2 : String; Var str256 : String);
+Procedure ConvertBase2to256(str2 : String; Var str256 : RawByteString);
 Procedure ConvertBase2to64(str2 : String; Var str64 : String);
-Procedure ConvertBase256StringToHexString(Str256 : String; Var HexStr : String);
-Procedure ConvertHexStringToBase256String(HexStr : String; Var Str256 : String);
-Procedure PGPConvertBase256to64(Var str256, str64 : String);
-Procedure PGPConvertBase64to256(str64 : String; Var str256 : String);
+Procedure ConvertBase256StringToHexString(Str256 : RawByteString; Var HexStr : String);
+Procedure ConvertHexStringToBase256String(HexStr : String; Var Str256 : RawByteString);
+Procedure PGPConvertBase256to64(str256 : RawByteString; Var str64 : String);
+Procedure PGPConvertBase64to256(str64 : String; Var str256 : RawByteString);
 Procedure PGPConvertBase64to2(str64 : String; Var str2 : String);
-Procedure FGIntToBase2String(Const FGInt : TFGInt; Var S : String);
-Procedure Base2StringToFGInt(S : String; Var FGInt : TFGInt);
-Procedure FGIntToBase256String(Const FGInt : TFGInt; Var str256 : String);
-Procedure Base256StringToFGInt(str256 : String; Var FGInt : TFGInt);
+Procedure FGIntToBase2String(Const FGInt : TFGInt; Out S : String);
+Procedure Base2StringToFGInt(S : String; Out FGInt : TFGInt);
+Procedure FGIntToBase256String(Const FGInt : TFGInt; Out str256 : RawByteString);
+Procedure Base256StringToFGInt(str256 : RawByteString; Out FGInt : TFGInt);
 Procedure PGPMPIToFGInt(PGPMPI : String; Var FGInt : TFGInt);
-Procedure FGIntToPGPMPI(FGInt : TFGInt; Var PGPMPI : String);
-Procedure Base10StringToFGInt(Base10 : String; Var FGInt : TFGInt);
+Procedure FGIntToPGPMPI(FGInt : TFGInt; Var PGPMPI : RawByteString);
+Procedure Base10StringToFGInt(Base10 : String; Out FGInt : TFGInt);
 Procedure FGIntToBase10String(Const FGInt : TFGInt; Var Base10 : String);
 Procedure FGIntDestroy(Var FGInt : TFGInt);
 Function FGIntCompareAbs(Const FGInt1, FGInt2 : TFGInt) : TCompare;
-Procedure FGIntAdd(Const FGInt1, FGInt2 : TFGInt; Var Sum : TFGInt);
+Procedure FGIntAdd(Const FGInt1, FGInt2 : TFGInt; Out Result : TFGInt);
 Procedure FGIntChangeSign(Var FGInt : TFGInt);
-Procedure FGIntSub(Var FGInt1, FGInt2, dif : TFGInt);
-Procedure FGIntMulByInt(Const FGInt : TFGInt; Var res : TFGInt; by : LongWord);
+Procedure FGIntSub(Const FGInt1, FGInt2 : TFGInt; Out dif : TFGInt);
+Procedure FGIntMulByInt(Const FGInt : TFGInt; Out Result : TFGInt; by : LongWord);
 Procedure FGIntMulByIntbis(Var FGInt : TFGInt; by : LongWord);
-Procedure FGIntDivByInt(Const FGInt : TFGInt; Var res : TFGInt; by : LongWord; Var modres : LongWord);
-Procedure FGIntDivByIntBis(Var FGInt : TFGInt; by : LongWord; Var modres : LongWord);
-Procedure FGIntModByInt(Const FGInt : TFGInt; by : LongWord; Var modres : LongWord);
+Procedure FGIntDivByInt(Const FGInt : TFGInt; Out Result : TFGInt; by : LongWord; Out ModResult : LongWord);
+Procedure FGIntDivByIntBis(Var FGInt : TFGInt; by : LongWord; Out modres : LongWord);
+Procedure FGIntModByInt(Const FGInt : TFGInt; by : LongWord; Out modres : LongWord);
 Procedure FGIntAbs(Var FGInt : TFGInt);
-Procedure FGIntCopy(Const FGInt1 : TFGInt; Var FGInt2 : TFGInt);
+Procedure FGIntAbsCopy(Const FGInt : TFGInt; Out Result : TFGInt);
+Procedure FGIntCopy(Const FGInt1 : TFGInt; Out FGInt2 : TFGInt);
 Procedure FGIntShiftLeft(Var FGInt : TFGInt);
 Procedure FGIntShiftRight(Var FGInt : TFGInt);
 Procedure FGIntShiftRightBy31(Var FGInt : TFGInt);
 Procedure FGIntShiftLeftBy31Times(Var FGInt : TFGInt; times : LongWord);
 Procedure FGIntAddBis(Var FGInt1 : TFGInt; Const FGInt2 : TFGInt);
 Procedure FGIntSubBis(Var FGInt1 : TFGInt; Const FGInt2 : TFGInt);
-Procedure FGIntMul(Const FGInt1, FGInt2 : TFGInt; Var Prod : TFGInt);
-Procedure FGIntSquare(Const FGInt : TFGInt; Var Square : TFGInt);
-Procedure FGIntExp(Const FGInt, exp : TFGInt; Var res : TFGInt);
-Procedure FGIntFac(Const FGInt : TFGInt; Var res : TFGInt);
+Procedure FGIntMul(Const FGInt1, FGInt2 : TFGInt; Out Result : TFGInt);
+Procedure FGIntSquare(Const FGInt : TFGInt; Out Result : TFGInt);
+Procedure FGIntExp(Const FGInt, exp : TFGInt; Out Result : TFGInt);
+Procedure FGIntFac(Const FGInt : TFGInt; Out Result : TFGInt);
 Procedure FGIntShiftLeftBy31(Var FGInt : TFGInt);
-Procedure FGIntDivMod(Var FGInt1, FGInt2, QFGInt, MFGInt : TFGInt);
-Procedure FGIntDiv(Var FGInt1, FGInt2, QFGInt : TFGInt);
+Procedure FGIntDivMod(Const FGInt1, FGInt2 : TFGInt; Out QFGResult, MFGResult : TFGInt);
+Procedure FGIntDiv(Const FGInt1, FGInt2 : TFGInt; Out QFGResult : TFGInt);
 Procedure FGIntMulByIntSubBis(Var FGInt1 : TFGInt; Const FGInt2 : TFGInt; divInt : LongWord);
-Procedure FGIntMod(Var FGInt1, FGInt2, MFGInt : TFGInt);
-Procedure FGIntSquareMod(Var FGInt, Modb, FGIntSM : TFGInt);
-Procedure FGIntAddMod(Var FGInt1, FGInt2, base, FGIntres : TFGInt);
-Procedure FGIntMulMod(Var FGInt1, FGInt2, base, FGIntres : TFGInt);
-Procedure FGIntModExp(Var FGInt, exp, modb, res : TFGInt);
-Procedure FGIntModBis(Const FGInt : TFGInt; Var FGIntOut : TFGInt; b, head : LongWord);
-Procedure FGIntMulModBis(Const FGInt1, FGInt2 : TFGInt; Var Prod : TFGInt; b, head : LongWord);
-Procedure FGIntMontgomeryMod(Const GInt, base, baseInv : TFGInt; Var MGInt : TFGInt; b : Longword; head : LongWord);
-Procedure FGIntMontgomeryModExp(Var FGInt, exp, modb, res : TFGInt);
-Procedure FGIntGCD(Const FGInt1, FGInt2 : TFGInt; Var GCD : TFGInt);
-Procedure FGIntLCM(Const FGInt1, FGInt2 : TFGInt; Var LCM : TFGInt);
-Procedure FGIntTrialDiv9999(Const FGInt : TFGInt; Var ok : boolean);
-Procedure FGIntRandom1(Var Seed, RandomFGInt : TFGInt);
-Procedure FGIntRabinMiller(Var FGIntp : TFGInt; nrtest : Longword; Var ok : boolean);
-Procedure FGIntBezoutBachet(Var FGInt1, FGInt2, a, b : TFGInt);
-Procedure FGIntModInv(Const FGInt1, base : TFGInt; Var Inverse : TFGInt);
-Procedure FGIntPrimetest(Var FGIntp : TFGInt; nrRMtests : integer; Var ok : boolean);
-Procedure FGIntLegendreSymbol(Var a, p : TFGInt; Var L : integer);
-Procedure FGIntSquareRootModP(Square, Prime : TFGInt; Var SquareRoot : TFGInt);
+Procedure FGIntMod(Const FGInt1, FGInt2 : TFGInt; Out MFGResult : TFGInt);
+Procedure FGIntSquareMod(Const FGInt, Modb : TFGInt; Out Result : TFGInt);
+Procedure FGIntAddMod(Const FGInt1, FGInt2, base : TFGInt; Out Result : TFGInt);
+Procedure FGIntMulMod(Const FGInt1, FGInt2, base : TFGInt; Out Result : TFGInt);
+Procedure FGIntModExp(Const FGInt, exp, modb : TFGInt; Out Result : TFGInt);
+Procedure FGIntModBis(Const FGInt : TFGInt; Out Result : TFGInt; b, head : LongWord);
+Procedure FGIntMulModBis(Const FGInt1, FGInt2 : TFGInt; Out Result : TFGInt; b, head : LongWord);
+Procedure FGIntMontgomeryMod(Const GInt, base, baseInv : TFGInt; Out Result : TFGInt; b : Longword; head : LongWord);
+Procedure FGIntMontgomeryModExp(Const FGInt, exp, modb : TFGInt; Out Result : TFGInt);
+Procedure FGIntGCD(Const FGInt1, FGInt2 : TFGInt; Out Result : TFGInt);
+Procedure FGIntLCM(Const FGInt1, FGInt2 : TFGInt; Out Result : TFGInt);
+Procedure FGIntTrialDiv9999(Const FGInt : TFGInt; Out ok : boolean);
+Procedure FGIntRandom1(Const Seed : TFGInt; Out RandomFGInt : TFGInt);
+Procedure FGIntRabinMiller(Const FGIntp : TFGInt; nrtest : Longword; Out ok : boolean);
+Procedure FGIntBezoutBachet(Const FGInt1, FGInt2 : TFGInt; Out a, b : TFGInt);
+Procedure FGIntModInv(Const FGInt1, base : TFGInt; Out Result : TFGInt);
+Procedure FGIntPrimetest(Const FGIntp : TFGInt; nrRMtests : integer; Out ok : boolean);
+Procedure FGIntLegendreSymbol(Const a, p : TFGInt; Out L : integer);
+Procedure FGIntSquareRootModP(Const Square, Prime : TFGInt; Out Result : TFGInt);
 
 
 
@@ -190,7 +191,7 @@ Var
 
 
 
-Procedure zeronetochar8(Var g : char; Const x : String);
+Procedure zeronetochar8(Out g : char; Const x : String);
 Var
    i : Integer;
    b : byte;
@@ -205,7 +206,7 @@ Begin
 End;
 
 
-Procedure zeronetochar6(Var g : integer; Const x : String);
+Procedure zeronetochar6(Out g : integer; Const x : String);
 Var
    I : Integer;
 Begin
@@ -221,7 +222,7 @@ Begin
 End;
 
 
-Procedure initialize8(Var trans : Array Of String);
+Procedure initialize8(Out trans : Array Of String);
 Var
    c1, c2, c3, c4, c5, c6, c7, c8 : integer;
    x : String;
@@ -243,7 +244,7 @@ Begin
 End;
 
 
-Procedure initialize6(Var trans : Array Of String);
+Procedure initialize6(Out trans : Array Of String);
 Var
    c1, c2, c3, c4, c5, c6 : integer;
    x : String;
@@ -262,7 +263,7 @@ Begin
                   End;
 End;
 
-Procedure initialize6PGP(Var trans : Array Of String);
+Procedure initialize6PGP(Out trans : Array Of String);
 Var
    c1, c2, c3, c4, c5, c6 : integer;
    x : String;
@@ -284,7 +285,7 @@ End;
 
 // Convert base 8 strings to base 6 strings and visa versa
 
-Procedure ConvertBase256to64(Const str256 : String; Var str64 : String);
+Procedure ConvertBase256to64(Const str256 : RawByteString; Var str64 : String);
 Var
    temp : String;
    trans : Array[0..255] Of String;
@@ -306,7 +307,7 @@ Begin
 End;
 
 
-Procedure ConvertBase64to256(Const str64 : String; Var str256 : String);
+Procedure ConvertBase64to256(Const str64 : String; Var str256 : RawByteString);
 Var
    temp : String;
    trans : Array[0..255] Of String;
@@ -329,7 +330,7 @@ End;
 
 // Convert base 8 & 6 bit strings to base 2 strings and visa versa
 
-Procedure ConvertBase256to2(Const str256 : String; Var str2 : String);
+Procedure ConvertBase256to2(Const str256 : RawByteString; Var str2 : String);
 Var
    trans : Array[0..255] Of String;
    i : longint;
@@ -351,7 +352,7 @@ Begin
 End;
 
 
-Procedure ConvertBase2to256(str2 : String; Var str256 : String);
+Procedure ConvertBase2to256(str2 : String; Var str256 : RawByteString);
 Var
    i, len8 : longint;
    g : char;
@@ -387,7 +388,7 @@ End;
 
 // Convert base 256 strings to base 16 (HexaDecimal) strings and visa versa
 
-Procedure ConvertBase256StringToHexString(Str256 : String; Var HexStr : String);
+Procedure ConvertBase256StringToHexString(Str256 : RawByteString; Var HexStr : String);
 Var
    i : longint;
    b : byte;
@@ -404,7 +405,7 @@ Begin
 End;
 
 
-Procedure ConvertHexStringToBase256String(HexStr : String; Var Str256 : String);
+Procedure ConvertHexStringToBase256String(HexStr : String; Var Str256 : RawByteString);
 Var
    i : longint;
    b, h1, h2 : byte;
@@ -431,7 +432,7 @@ End;
 
 // Convert base 256 strings to base 64 strings and visa versa, PGP style
 
-Procedure PGPConvertBase256to64(Var str256, str64 : String);
+Procedure PGPConvertBase256to64(str256 : RawByteString; var str64 : String);
 Var
    temp, x, a : String;
    i, len6 : longint;
@@ -465,7 +466,7 @@ Begin
 End;
 
 
-Procedure PGPConvertBase64to256(str64 : String; Var str256 : String);
+Procedure PGPConvertBase64to256(str64 : String; Var str256 : RawByteString);
 Var
    temp, x : String;
    i, j, len8 : longint;
@@ -508,7 +509,7 @@ End;
 
 // Convert a FGInt to a binary string (base 2) & visa versa
 
-Procedure FGIntToBase2String(Const FGInt : TFGInt; Var S : String);
+Procedure FGIntToBase2String(Const FGInt : TFGInt; Out S : String);
 Var
    i : LongWord;
    j : integer;
@@ -528,7 +529,7 @@ Begin
 End;
 
 
-Procedure Base2StringToFGInt(S : String; Var FGInt : TFGInt);
+Procedure Base2StringToFGInt(S : String; Out FGInt : TFGInt);
 Var
    i, j, size : LongWord;
 Begin
@@ -544,7 +545,7 @@ Begin
    While length(S) > 0 Do
    Begin
       If S[length(S)] = '1' Then
-         FGInt.Number[j] := FGInt.Number[j] Or (1 Shl i);
+         FGInt.Number[j] := FGInt.Number[j] Or Longword(1 Shl i);
       i := i + 1;
       If i = 31 Then
       Begin
@@ -560,7 +561,7 @@ End;
 
 // Convert a FGInt to an base 256 string & visa versa
 
-Procedure FGIntToBase256String(Const FGInt : TFGInt; Var str256 : String);
+Procedure FGIntToBase256String(Const FGInt : TFGInt; Out str256 : RawByteString);
 Var
    temp1 : String;
    i, len8 : LongWord;
@@ -579,7 +580,7 @@ Begin
 End;
 
 
-Procedure Base256StringToFGInt(str256 : String; Var FGInt : TFGInt);
+Procedure Base256StringToFGInt(str256 : RawByteString; Out FGInt : TFGInt);
 Var
    temp1 : String;
    i : longint;
@@ -605,7 +606,7 @@ Begin
 End;
 
 
-Procedure FGIntToPGPMPI(FGInt : TFGInt; Var PGPMPI : String);
+Procedure FGIntToPGPMPI(FGInt : TFGInt; Var PGPMPI : RawByteString);
 Var
    len, i : word;
    c : char;
@@ -624,14 +625,14 @@ End;
 
 // Convert a base 10 string to a FGInt
 
-Procedure Base10StringToFGInt(Base10 : String; Var FGInt : TFGInt);
+Procedure Base10StringToFGInt(Base10 : String; Out FGInt : TFGInt);
 Var
    i, size : LongWord;
    j : word;
    S, x : String;
    sign : TSign;
 
-   Procedure GIntDivByIntBis1(Var GInt : TFGInt; by : LongWord; Var modres : word);
+   Procedure GIntDivByIntBis1(Var GInt : TFGInt; by : LongWord; Out modres : word);
    Var
       i, size, rest, temp : LongWord;
    Begin
@@ -749,9 +750,10 @@ End;
 
 // Add 2 FGInts, FGInt1 + FGInt2 = Sum
 
-Procedure FGIntAdd(Const FGInt1, FGInt2 : TFGInt; Var Sum : TFGInt);
+Procedure FGIntAdd(Const FGInt1, FGInt2 : TFGInt; Out Result : TFGInt);
 Var
    i, size1, size2, size, rest, Trest : LongWord;
+   Sum : TFGInt;
 Begin
    size1 := FGInt1.Number[0];
    size2 := FGInt2.Number[0];
@@ -826,6 +828,7 @@ Begin
          End;
       End;
    End;
+   Result := Sum;
 End;
 
 
@@ -838,20 +841,21 @@ End;
 
 // Substract 2 FGInts, FGInt1 - FGInt2 = dif
 
-Procedure FGIntSub(Var FGInt1, FGInt2, dif : TFGInt);
+Procedure FGIntSub(Const FGInt1, FGInt2 : TFGInt; Out dif : TFGInt);
 Begin
-   FGIntChangeSign(FGInt2);
-   FGIntAdd(FGInt1, FGInt2, dif);
-   FGIntChangeSign(FGInt2);
+   FGIntCopy(FGInt2, dif);
+   FGIntChangeSign(dif);
+   FGIntAdd(FGInt1, dif, dif);
 End;
 
 
 // multiply a FGInt by an integer, FGInt * by = res, by < 2147483648
 
-Procedure FGIntMulByInt(Const FGInt : TFGInt; Var res : TFGInt; by : LongWord);
+Procedure FGIntMulByInt(Const FGInt : TFGInt; Out Result : TFGInt; by : LongWord);
 Var
    i, size, rest : LongWord;
    Trest : int64;
+   res : TFGInt;
 Begin
    size := FGInt.Number[0];
    setlength(res.Number, (size + 2));
@@ -873,6 +877,7 @@ Begin
       SetLength(Res.Number, size + 1);
    Res.Number[0] := size;
    Res.Sign := FGInt.Sign;
+   Result := res;
 End;
 
 
@@ -907,10 +912,12 @@ End;
 
 // divide a FGInt by an integer, FGInt = res * by + modres
 
-Procedure FGIntDivByInt(Const FGInt : TFGInt; Var res : TFGInt; by : LongWord; Var modres : LongWord);
+Procedure FGIntDivByInt(Const FGInt : TFGInt; Out Result : TFGInt; by : LongWord; Out ModResult : LongWord);
 Var
    i, size : LongWord;
    rest : int64;
+   res : TFGInt;
+   modres : LongWord;
 Begin
    size := FGInt.Number[0];
    setlength(res.Number, (size + 1));
@@ -929,12 +936,14 @@ Begin
    res.Number[0] := size;
    Res.Sign := FGInt.Sign;
    If FGInt.sign = negative Then modres := by - modres;
+   Result := res;
+   ModResult := modres;
 End;
                                                          
 
 // divide a FGInt by an integer, FGInt = FGInt * by + modres
 
-Procedure FGIntDivByIntBis(Var FGInt : TFGInt; by : LongWord; Var modres : LongWord);
+Procedure FGIntDivByIntBis(Var FGInt : TFGInt; by : LongWord; Out modres : LongWord);
 Var
    i, size : LongWord;
    temp, rest : int64;
@@ -961,7 +970,7 @@ End;
 
 // Reduce a FGInt modulo by (=an integer), FGInt mod by = modres
 
-Procedure FGIntModByInt(Const FGInt : TFGInt; by : LongWord; Var modres : LongWord);
+Procedure FGIntModByInt(Const FGInt : TFGInt; by : LongWord; Out modres : LongWord);
 Var
    i, size : LongWord;
    temp, rest : int64;
@@ -986,10 +995,15 @@ Begin
    FGInt.Sign := positive;
 End;
 
+Procedure FGIntAbsCopy(Const FGInt : TFGInt; Out Result : TFGInt);
+Begin
+   FGIntCopy(FGInt, Result);
+   Result.Sign := positive;
+End;
 
 // Copy a FGInt1 into FGInt2
 
-Procedure FGIntCopy(Const FGInt1 : TFGInt; Var FGInt2 : TFGInt);
+Procedure FGIntCopy(Const FGInt1 : TFGInt; Out FGInt2 : TFGInt);
 Begin
    FGInt2.Sign := FGInt1.Sign;
    FGInt2.Number := Nil;
@@ -1068,28 +1082,31 @@ End;
 Procedure FGIntAddBis(Var FGInt1 : TFGInt; Const FGInt2 : TFGInt);
 Var
    i, size1, size2, Trest, rest : LongWord;
+   Result : TFGInt;
 Begin
-   size1 := FGInt1.Number[0];
+   FGIntCopy(FGInt1, Result);
+   size1 := Result.Number[0];
    size2 := FGInt2.Number[0];
    rest := 0;
    For i := 1 To size2 Do
    Begin
-      Trest := FGInt1.Number[i] + FGInt2.Number[i] + rest;
+      Trest := Result.Number[i] + FGInt2.Number[i] + rest;
       rest := Trest Shr 31;
-      FGInt1.Number[i] := Trest And 2147483647;
+      Result.Number[i] := Trest And 2147483647;
    End;
    For i := size2 + 1 To size1 Do
    Begin
-      Trest := FGInt1.Number[i] + rest;
+      Trest := Result.Number[i] + rest;
       rest := Trest Shr 31;
-      FGInt1.Number[i] := Trest And 2147483647;
+      Result.Number[i] := Trest And 2147483647;
    End;
    If rest <> 0 Then
    Begin
-      SetLength(FGInt1.Number, size1 + 2);
-      FGInt1.Number[0] := size1 + 1;
-      FGInt1.Number[size1 + 1] := rest;
+      SetLength(Result.Number, size1 + 2);
+      Result.Number[0] := size1 + 1;
+      Result.Number[size1 + 1] := rest;
    End;
+   FGInt1 := Result;
 End;
 
 
@@ -1098,45 +1115,49 @@ End;
 Procedure FGIntSubBis(Var FGInt1 : TFGInt; Const FGInt2 : TFGInt);
 Var
    i, size1, size2, rest, Trest : LongWord;
+   Result : TFGInt;
 Begin
-   size1 := FGInt1.Number[0];
+   FGIntCopy(FGInt1, Result);
+   size1 := Result.Number[0];
    size2 := FGInt2.Number[0];
    rest := 0;
    For i := 1 To size2 Do
    Begin
-      Trest := (2147483648 Or FGInt1.Number[i]) - FGInt2.Number[i] - rest;
+      Trest := (2147483648 Or Result.Number[i]) - FGInt2.Number[i] - rest;
       If (Trest > 2147483647) Then
          rest := 0
       Else
          rest := 1;
-      FGInt1.Number[i] := Trest And 2147483647;
+      Result.Number[i] := Trest And 2147483647;
    End;
    For i := size2 + 1 To size1 Do
    Begin
-      Trest := (2147483648 Or FGInt1.Number[i]) - rest;
+      Trest := (2147483648 Or Result.Number[i]) - rest;
       If (Trest > 2147483647) Then
          rest := 0
       Else
          rest := 1;
-      FGInt1.Number[i] := Trest And 2147483647;
+      Result.Number[i] := Trest And 2147483647;
    End;
    i := size1;
-   While (FGInt1.Number[i] = 0) And (i > 1) Do
+   While (Result.Number[i] = 0) And (i > 1) Do
       i := i - 1;
    If i <> size1 Then
    Begin
-      SetLength(FGInt1.Number, i + 1);
-      FGInt1.Number[0] := i;
+      SetLength(Result.Number, i + 1);
+      Result.Number[0] := i;
    End;
+   FGInt1 := Result;
 End;
 
 
 // Multiply 2 FGInts, FGInt1 * FGInt2 = Prod
 
-Procedure FGIntMul(Const FGInt1, FGInt2 : TFGInt; Var Prod : TFGInt);
+Procedure FGIntMul(Const FGInt1, FGInt2 : TFGInt; Out Result : TFGInt);
 Var
    i, j, size, size1, size2, rest : LongWord;
    Trest : int64;
+   Prod : TFGInt;
 Begin
    size1 := FGInt1.Number[0];
    size2 := FGInt2.Number[0];
@@ -1148,13 +1169,13 @@ Begin
    For i := 1 To size2 Do
    Begin
       rest := 0;
-      For j := 1 To size1 Do
+      For j := 0 To size1 - 1 Do
       Begin
-         Trest := FGInt1.Number[j];
+         Trest := FGInt1.Number[j + 1];
          Trest := Trest * FGInt2.Number[i];
-         Trest := Trest + Prod.Number[j + i - 1];
+         Trest := Trest + Prod.Number[j + i];
          Trest := Trest + rest;
-         Prod.Number[j + i - 1] := Trest And 2147483647;
+         Prod.Number[j + i] := Trest And 2147483647;
          rest := Trest Shr 31;
       End;
       Prod.Number[i + size1] := rest;
@@ -1172,15 +1193,17 @@ Begin
       Prod.Sign := Positive
    Else
       prod.Sign := negative;
+   Result := Prod;
 End;
 
 
 // Square a FGInt, FGInt² = Square
 
-Procedure FGIntSquare(Const FGInt : TFGInt; Var Square : TFGInt);
+Procedure FGIntSquare(Const FGInt : TFGInt; Out Result : TFGInt);
 Var
    size, size1, i, j, rest : LongWord;
    Trest : int64;
+   Square : TFGInt;
 Begin
    size1 := FGInt.Number[0];
    size := 2 * size1;
@@ -1192,16 +1215,16 @@ Begin
    Begin
       Trest := FGInt.Number[i];
       Trest := Trest * FGInt.Number[i];
-      Trest := Trest + Square.Number[2 * i - 1];
-      Square.Number[2 * i - 1] := Trest And 2147483647;
+      Trest := Trest + Square.Number[2 * Int64(i) - 1];
+      Square.Number[2 * Int64(i) - 1] := Trest And 2147483647;
       rest := Trest Shr 31;
-      For j := i + 1 To size1 Do
+      For j := i To size1 - 1 Do
       Begin
          Trest := FGInt.Number[i] Shl 1;
-         Trest := Trest * FGInt.Number[j];
-         Trest := Trest + Square.Number[i + j - 1];
+         Trest := Trest * FGInt.Number[j + 1];
+         Trest := Trest + Square.Number[i + j];
          Trest := Trest + rest;
-         Square.Number[i + j - 1] := Trest And 2147483647;
+         Square.Number[i + j] := Trest And 2147483647;
          rest := Trest Shr 31;
       End;
       Square.Number[i + size1] := rest;
@@ -1214,16 +1237,18 @@ Begin
       SetLength(Square.Number, size + 1);
       Square.Number[0] := size;
    End;
+   Result := Square;
 End;
 
 
 // Exponentiate a FGInt, FGInt^exp = res
 
-Procedure FGIntExp(Const FGInt, exp : TFGInt; Var res : TFGInt);
+Procedure FGIntExp(Const FGInt, exp : TFGInt; Out Result : TFGInt);
 Var
    temp2, temp3 : TFGInt;
    S : String;
    i : LongWord;
+   res : TFGInt;
 Begin
    FGIntToBase2String(exp, S);
    If S[length(S)] = '0' Then Base10StringToFGInt('1', res) Else FGIntCopy(FGInt, res);
@@ -1239,14 +1264,16 @@ Begin
             FGIntCopy(temp3, res);
          End;
       End;
+   Result := res;
 End;
 
 
 // Compute FGInt! = FGInt * (FGInt - 1) * (FGInt - 2) * ... * 3 * 2 * 1
 
-Procedure FGIntFac(Const FGInt : TFGInt; Var res : TFGInt);
+Procedure FGIntFac(Const FGInt : TFGInt; Out Result : TFGInt);
 Var
    one, temp, temp1 : TFGInt;
+   res : TFGInt;
 Begin
    FGIntCopy(FGInt, temp);
    Base10StringToFGInt('1', res);
@@ -1261,6 +1288,7 @@ Begin
 
    FGIntDestroy(one);
    FGIntDestroy(temp);
+   Result := res;
 End;
 
 
@@ -1285,7 +1313,7 @@ End;
 
 Procedure FGIntShiftLeftBy31Times(Var FGInt : TFGInt; times : LongWord);
 Var
-   i, size : longint;
+   i, size : Longword;
 Begin
    size := FGInt.Number[0];
    SetLength(FGInt.Number, size + 1 + times);
@@ -1303,19 +1331,19 @@ End;
 
 // Divide 2 FGInts, FGInt1 = FGInt2 * QFGInt + MFGInt, MFGInt is always positive
 
-Procedure FGIntDivMod(Var FGInt1, FGInt2, QFGInt, MFGInt : TFGInt);
+Procedure FGIntDivMod(Const FGInt1, FGInt2 : TFGInt; Out QFGResult, MFGResult : TFGInt);
 Var
    one, zero, temp1 : TFGInt;
    s1, s2 : TSign;
    j, s, t : LongWord;
    i, k : int64;
+   QFGInt : TFGInt;
+   MFGInt : TFGInt;
 Begin
    s1 := FGInt1.Sign;
    s2 := FGInt2.Sign;
-   FGIntAbs(FGInt1);
-   FGIntAbs(FGInt2);
-   FGIntCopy(FGInt1, MFGInt);
-   FGIntCopy(FGInt2, temp1);
+   FGIntAbsCopy(FGInt1, MFGInt);
+   FGIntAbsCopy(FGInt2, temp1);
 
    If FGIntCompareAbs(FGInt1, FGInt2) <> St Then
    Begin
@@ -1338,7 +1366,7 @@ Begin
                i := MFGInt.Number[MFGInt.Number[0]];
                i := i Shl 31;
                i := i + MFGInt.Number[MFGInt.Number[0] - 1];
-               i := i Div (temp1.Number[temp1.Number[0]] + 1);
+               i := i Div (Int64(temp1.Number[temp1.Number[0]]) + 1);
             End
             Else
 //               i := MFGInt.Number[MFGInt.Number[0]] Div (temp1.Number[temp1.Number[0]] + 1);
@@ -1409,27 +1437,25 @@ Begin
       QFGInt.Sign := s2;
    FGIntDestroy(one);
    FGIntDestroy(zero);
-
-   FGInt1.Sign := s1;
-   FGInt2.Sign := s2;
+   QFGResult := QFGInt;
+   MFGResult := MFGInt;
 End;
 
 
 // Same as above but doesn 't compute MFGInt
 
-Procedure FGIntDiv(Var FGInt1, FGInt2, QFGInt : TFGInt);
+Procedure FGIntDiv(Const FGInt1, FGInt2 : TFGInt; Out QFGResult : TFGInt);
 Var
    one, zero, temp1, MFGInt : TFGInt;
    s1, s2 : TSign;
    j, s, t : LongWord;
    i, k : int64;
+   QFGInt : TFGInt;
 Begin
    s1 := FGInt1.Sign;
    s2 := FGInt2.Sign;
-   FGIntAbs(FGInt1);
-   FGIntAbs(FGInt2);
-   FGIntCopy(FGInt1, MFGInt);
-   FGIntCopy(FGInt2, temp1);
+   FGIntAbsCopy(FGInt1, MFGInt);
+   FGIntAbsCopy(FGInt2, temp1);
 
    If FGIntCompareAbs(FGInt1, FGInt2) <> St Then
    Begin
@@ -1452,7 +1478,7 @@ Begin
                i := MFGInt.Number[MFGInt.Number[0]];
                i := i Shl 31;
                i := i + MFGInt.Number[MFGInt.Number[0] - 1];
-               i := i Div (temp1.Number[temp1.Number[0]] + 1);
+               i := i Div (Int64(temp1.Number[temp1.Number[0]]) + 1);
             End
             Else
 //               i := MFGInt.Number[MFGInt.Number[0]] Div (temp1.Number[temp1.Number[0]] + 1);
@@ -1524,9 +1550,7 @@ Begin
    FGIntDestroy(one);
    FGIntDestroy(zero);
    FGIntDestroy(MFGInt);
-
-   FGInt1.Sign := s1;
-   FGInt2.Sign := s2;
+   QFGResult := QFGInt;
 End;
 
 
@@ -1577,19 +1601,17 @@ End;
 
 
 
-Procedure FGIntMod(Var FGInt1, FGInt2, MFGInt : TFGInt);
+Procedure FGIntMod(Const FGInt1, FGInt2 : TFGInt; Out MFGResult : TFGInt);
 Var
    zero, temp1 : TFGInt;
-   s1, s2 : TSign;
-   s, t : LongWord;
+   s1 : TSign;
+   s : LongWord;
    i, j : int64;
+   MFGInt : TFGInt;
 Begin
    s1 := FGInt1.Sign;
-   s2 := FGInt2.Sign;
-   FGIntAbs(FGInt1);
-   FGIntAbs(FGInt2);
-   FGIntCopy(FGInt1, MFGInt);
-   FGIntCopy(FGInt2, temp1);
+   FGIntAbsCopy(FGInt1, MFGInt);
+   FGIntAbsCopy(FGInt2, temp1);
 
    If FGIntCompareAbs(FGInt1, FGInt2) <> St Then
    Begin
@@ -1605,7 +1627,7 @@ Begin
                i := MFGInt.Number[MFGInt.Number[0]];
                i := i Shl 31;
                i := i + MFGInt.Number[MFGInt.Number[0] - 1];
-               i := i Div (temp1.Number[temp1.Number[0]] + 1);
+               i := i Div (Int64(temp1.Number[temp1.Number[0]]) + 1);
             End
             Else
 //               i := MFGInt.Number[MFGInt.Number[0]] Div (temp1.Number[temp1.Number[0]] + 1);
@@ -1648,55 +1670,60 @@ Begin
       End;
    End;
    FGIntDestroy(zero);
-
-   FGInt1.Sign := s1;
-   FGInt2.Sign := s2;
+   MFGResult := MFGInt;
 End;
 
 
 // Square a FGInt modulo Modb, FGInt^2 mod Modb = FGIntSM
 
-Procedure FGIntSquareMod(Var FGInt, Modb, FGIntSM : TFGInt);
+Procedure FGIntSquareMod(Const FGInt, Modb : TFGInt; Out Result : TFGInt);
 Var
    temp : TFGInt;
+   FGIntSM : TFGInt;
 Begin
    FGIntSquare(FGInt, temp);
    FGIntMod(temp, Modb, FGIntSM);
    FGIntDestroy(temp);
+   Result := FGIntSM;
 End;
 
 
 // Add 2 FGInts modulo base, (FGInt1 + FGInt2) mod base = FGIntres
 
-Procedure FGIntAddMod(Var FGInt1, FGInt2, base, FGIntres : TFGInt);
+Procedure FGIntAddMod(Const FGInt1, FGInt2, base : TFGInt; Out Result : TFGInt);
 Var
    temp : TFGInt;
+   FGIntres : TFGInt;
 Begin
    FGIntadd(FGInt1, FGInt2, temp);
    FGIntMod(temp, base, FGIntres);
    FGIntDestroy(temp);
+   Result := FGIntres;
 End;
 
 
 // Multiply 2 FGInts modulo base, (FGInt1 * FGInt2) mod base = FGIntres
 
-Procedure FGIntMulMod(Var FGInt1, FGInt2, base, FGIntres : TFGInt);
+Procedure FGIntMulMod(Const FGInt1, FGInt2, base : TFGInt; Out Result : TFGInt);
 Var
    temp : TFGInt;
+   FGIntres : TFGInt;
 Begin
    FGIntMul(FGInt1, FGInt2, temp);
    FGIntMod(temp, base, FGIntres);
    FGIntDestroy(temp);
+   Result := FGIntres;
 End;
 
 
 // Exponentiate 2 FGInts modulo base, (FGInt1 ^ FGInt2) mod modb = res
 
-Procedure FGIntModExp(Var FGInt, exp, modb, res : TFGInt);
+Procedure FGIntModExp(Const FGInt, exp, modb : TFGInt; Out Result : TFGInt);
 Var
    temp2, temp3 : TFGInt;
    i : LongWord;
    S : String;
+   res : TFGInt;
 Begin
    If (Modb.Number[1] Mod 2) = 1 Then
    Begin
@@ -1718,14 +1745,16 @@ Begin
       FGIntCopy(temp3, temp2);
    End;
    FGIntDestroy(temp2);
+   Result := res;
 End;
 
 
 // Procedures for Montgomery Exponentiation
 
-Procedure FGIntModBis(Const FGInt : TFGInt; Var FGIntOut : TFGInt; b, head : LongWord);
+Procedure FGIntModBis(Const FGInt : TFGInt; Out Result : TFGInt; b, head : LongWord);
 Var
    i : LongWord;
+   FGIntOut : TFGInt;
 Begin
    If b <= FGInt.Number[0] Then
    Begin
@@ -1742,17 +1771,19 @@ Begin
    End
    Else
       FGIntCopy(FGInt, FGIntOut);
+   Result := FGIntOut;
 End;
 
 
-Procedure FGIntMulModBis(Const FGInt1, FGInt2 : TFGInt; Var Prod : TFGInt; b, head : LongWord);
+Procedure FGIntMulModBis(Const FGInt1, FGInt2 : TFGInt; Out Result : TFGInt; b, head : LongWord);
 Var
    i, j, size, size1, size2, t, rest : LongWord;
    Trest : int64;
+   Prod : TFGInt;
 Begin
    size1 := FGInt1.Number[0];
    size2 := FGInt2.Number[0];
-   size := min(b, size1 + size2);
+   size := min(b, Int64(size1) + Int64(size2));
    SetLength(Prod.Number, (size + 1));
    For i := 1 To size Do
       Prod.Number[i] := 0;
@@ -1761,13 +1792,13 @@ Begin
    Begin
       rest := 0;
       t := min(size1, b - i + 1);
-      For j := 1 To t Do
+      For j := 0 To t - 1 Do
       Begin
-         Trest := FGInt1.Number[j];
+         Trest := FGInt1.Number[j + 1];
 	   Trest := Trest * FGInt2.Number[i];
-	   Trest := Trest + Prod.Number[j + i - 1];
+	   Trest := Trest + Prod.Number[j + i];
 	   Trest := Trest + rest;
-         Prod.Number[j + i - 1] := Trest And 2147483647;
+         Prod.Number[j + i] := Trest And 2147483647;
          rest := Trest Shr 31;
       End;
       If (i + size1) <= b Then Prod.Number[i + size1] := rest;
@@ -1786,13 +1817,15 @@ Begin
       Prod.Sign := Positive
    Else
       prod.Sign := negative;
+   Result := Prod;
 End;
 
 
-Procedure FGIntMontgomeryMod(Const GInt, base, baseInv : TFGInt; Var MGInt : TFGInt; b : Longword; head : LongWord);
+Procedure FGIntMontgomeryMod(Const GInt, base, baseInv : TFGInt; Out Result : TFGInt; b : Longword; head : LongWord);
 Var
    m, temp, temp1 : TFGInt;
    r : LongWord;
+   MGInt : TFGInt;
 Begin
    FGIntModBis(GInt, temp, b, head);
    FGIntMulModBis(temp, baseInv, m, b, head);
@@ -1809,14 +1842,16 @@ Begin
    If FGIntCompareAbs(MGInt, base) <> St Then FGIntSubBis(MGInt, base);
    FGIntDestroy(temp);
    FGIntDestroy(m);
+   Result := MGInt;
 End;
 
 
-Procedure FGIntMontgomeryModExp(Var FGInt, exp, modb, res : TFGInt);
+Procedure FGIntMontgomeryModExp(Const FGInt, exp, modb : TFGInt; Out Result : TFGInt);
 Var
    temp2, temp3, baseInv, r, zero : TFGInt;
    i, j, t, b, head : LongWord;
    S: String;
+   res : TFGInt;
 Begin
    Base2StringToFGInt('0', zero);
    FGIntMod(FGInt, modb, res);
@@ -1890,15 +1925,17 @@ Begin
    FGIntCopy(temp3, res);
    FGIntDestroy(temp3);
    FGIntDestroy(baseinv);
+   Result := res;
 End;
 
 
 // Compute the Greatest Common Divisor of 2 FGInts
 
-Procedure FGIntGCD(Const FGInt1, FGInt2 : TFGInt; Var GCD : TFGInt);
+Procedure FGIntGCD(Const FGInt1, FGInt2 : TFGInt; Out Result : TFGInt);
 Var
    k : TCompare;
    zero, temp1, temp2, temp3 : TFGInt;
+   GCD : TFGInt;
 Begin
    k := FGIntCompareAbs(FGInt1, FGInt2);
    If (k = Eq) Then FGIntCopy(FGInt1, GCD) Else
@@ -1918,26 +1955,29 @@ Begin
          FGIntDestroy(temp2);
          FGIntDestroy(zero);
       End;
+   Result := GCD;
 End;
 
 
 // Compute the Least Common Multiple of 2 FGInts
 
-Procedure FGIntLCM(Const FGInt1, FGInt2 : TFGInt; Var LCM : TFGInt);
+Procedure FGIntLCM(Const FGInt1, FGInt2 : TFGInt; Out Result : TFGInt);
 Var
    temp1, temp2 : TFGInt;
+   LCM : TFGInt;
 Begin
    FGIntGCD(FGInt1, FGInt2, temp1);
    FGIntmul(FGInt1, FGInt2, temp2);
    FGIntdiv(temp2, temp1, LCM);
    FGIntDestroy(temp1);
    FGIntDestroy(temp2);
+   Result := LCM;
 End;
 
 
 // Trialdivision of a FGInt upto 9999 and stopping when a divisor is found, returning ok=false
 
-Procedure FGIntTrialDiv9999(Const FGInt : TFGInt; Var ok : boolean);
+Procedure FGIntTrialDiv9999(Const FGInt : TFGInt; Out ok : boolean);
 Var
    j : LongWord;
    i : integer;
@@ -1959,7 +1999,7 @@ End;
 
 // A prng
 
-Procedure FGIntRandom1(Var Seed, RandomFGInt : TFGInt);
+Procedure FGIntRandom1(Const Seed : TFGInt; Out RandomFGInt : TFGInt);
 Var
    temp, base : TFGInt;
 Begin
@@ -1973,7 +2013,7 @@ End;
 
 // Perform a Rabin Miller Primality Test nrtest times on FGIntp, returns ok=true when FGIntp passes the test
 
-Procedure FGIntRabinMiller(Var FGIntp : TFGInt; nrtest : Longword; Var ok : boolean);
+Procedure FGIntRabinMiller(Const FGIntp : TFGInt; nrtest : Longword; Out ok : boolean);
 Var
    j, b, i : LongWord;
    m, z, temp1, temp2, temp3, zero, one, two, pmin1 : TFGInt;
@@ -2041,7 +2081,7 @@ End;
 
 // Compute the coefficients from the Bezout Bachet theorem, FGInt1 * a + FGInt2 * b = GCD(FGInt1, FGInt2)
 
-Procedure FGIntBezoutBachet(Var FGInt1, FGInt2, a, b : TFGInt);
+Procedure FGIntBezoutBachet(Const FGInt1, FGInt2 : TFGInt; Out a, b : TFGInt);
 Var
    zero, r1, r2, r3, ta, gcd, temp, temp1, temp2 : TFGInt;
 Begin
@@ -2087,9 +2127,10 @@ End;
 // Find the (multiplicative) Modular inverse of a FGInt in a finite ring
 // of additive order base
 
-Procedure FGIntModInv(Const FGInt1, base : TFGInt; Var Inverse : TFGInt);
+Procedure FGIntModInv(Const FGInt1, base : TFGInt; Out Result : TFGInt);
 Var
    zero, one, r1, r2, r3, tb, gcd, temp, temp1, temp2 : TFGInt;
+   Inverse : TFGInt;
 Begin
    Base10StringToFGInt('1', one);
    FGIntGCD(FGInt1, base, gcd);
@@ -2101,6 +2142,7 @@ Begin
       Base10StringToFGInt('0', inverse);
       Base10StringToFGInt('1', tb);
 
+      r3 := Default(TFGInt);
       Repeat
          FGIntDestroy(r3);
          FGIntdivmod(r1, r2, temp, r3);
@@ -2129,6 +2171,7 @@ Begin
    End;
    FGIntDestroy(gcd);
    FGIntDestroy(one);
+   Result := Inverse;
 End;
 
 
@@ -2136,7 +2179,7 @@ End;
 // if the FGInt passes perform nrRMtests Rabin Miller primality tests, returns ok when a
 // FGInt is probably prime
 
-Procedure FGIntPrimetest(Var FGIntp : TFGInt; nrRMtests : integer; Var ok : boolean);
+Procedure FGIntPrimetest(Const FGIntp : TFGInt; nrRMtests : integer; Out ok : boolean);
 Begin
    FGIntTrialdiv9999(FGIntp, ok);
    If ok Then FGIntRabinMiller(FGIntp, nrRMtests, ok);
@@ -2148,7 +2191,7 @@ End;
 // quadratic residu mod p, -1 if a is a quadratic
 // nonresidu mod p
 
-Procedure FGIntLegendreSymbol(Var a, p : TFGInt; Var L : integer);
+Procedure FGIntLegendreSymbol(Const a, p : TFGInt; Out L : integer);
 Var
    temp1, temp2, temp3, temp4, temp5, zero, one : TFGInt;
    i : LongWord;
@@ -2210,11 +2253,12 @@ End;
 // Compute a square root modulo a prime number
 // SquareRoot^2 mod Prime = Square
 
-Procedure FGIntSquareRootModP(Square, Prime : TFGInt; Var SquareRoot : TFGInt);
+Procedure FGIntSquareRootModP(Const Square, Prime : TFGInt; Out Result : TFGInt);
 Var
    one, n, b, s, r, temp, temp1, temp2, temp3 : TFGInt;
    a, i, j : longint;
    L : Integer;
+   SquareRoot : TFGInt;
 Begin
    Base2StringToFGInt('1', one);
    Base2StringToFGInt('10', n);
@@ -2274,6 +2318,7 @@ Begin
    FGIntDestroy(temp1);
    FGIntDestroy(one);
    FGIntDestroy(n);
+   Result := SquareRoot;
 End;
 
 
